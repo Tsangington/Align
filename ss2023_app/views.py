@@ -6,3 +6,6 @@ views = Blueprint('views', __name__)
 def landing():
     return render_template('landing.html')
 
+@views.route('/profile')
+def profile():
+    return render_template('profile.html')

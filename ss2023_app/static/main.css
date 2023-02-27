@@ -7,11 +7,22 @@
 /* Style the links inside the navigation bar */
 body {
     background: #383838;
-    color: #00eeff
+    color: #00eeff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+h1{
+    margin-top: 0px;
+}
 
+.topnav{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
 }
 
 .topnav a {
+    
     border-bottom: 1px solid #00eeff;
     float: right;
     color: #fffffc;
@@ -19,14 +30,14 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 20px;
-    }
+}
     
-    .topnav a:hover {
-    background-color: #282828;
-    }
+.topnav a:hover {
+background-color: #282828;
+}
     
-    /* WIP Add a color to the active/current link */
-    .topnav a.active {
-    background-color: #ef233cff;
-    color: #1c1c1cff;
-    }
+/* WIP Add a color to the active/current link */
+.topnav a.active {
+background-color: #ef233cff;
+color: #1c1c1cff;
+}
