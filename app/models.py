@@ -8,6 +8,10 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     firstName = db.Column(db.String(150))
     lastName = db.Column(db.String(150))
-    userType = db.Column(db.String(150))
     creationDate = db.Column(db.DateTime(timezone = True), default = func.now())
+    roles = db.Column(db.Integer) 
+    #Roles: 
+    #Student = 1
+    #Teacher = 2
+    #Admin = 3
 

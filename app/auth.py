@@ -18,7 +18,7 @@ def login():
                 flash('Logged in successfully!', category = 'success')
                 login_user(user, remember = True)
                 login_manager.session['firstName'] = user.firstName
-                return redirect(url_for('routes.profile'))
+                return redirect(url_for('views.profile'))
             else:
                 flash('Incorrect password, try again.', category = 'error')
         else:
@@ -33,8 +33,9 @@ def signUp():
         email = request.form.get('email')
         firstName = request.form.get('firstName')
         lastName = request.form.get('lastName')
-        password = request.form.get('password')
-        passwordConfirm = request.form.get('passwordConfirm')
+        password = request.form.get('password1')
+        passwordConfirm = request.form.get('password2')
+        userType = request.form.get('radioUserType')
 
         user = User.query.filter_by(email = email).first()
         if user:
@@ -42,14 +43,15 @@ def signUp():
         elif password != passwordConfirm:
             flash('Passwords must match', category='error')
         elif len(password) < 8:
-            flash('Passwords must be 5 or more characters', category='error')
+            flash('Passwords must be 8 or more characters', category='error')
         else:
-            new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'))
+            if userType == "Teacher":
+                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roles = 2)
+            else:
+                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roles = 1)
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!', category='success')
-            return redirect(url_for('routes.login'))
+            return redirect(url_for('auth.login'))
     
-    data = request.form
-    print(data)
     return render_template('auth/signup.html')

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block head %}
+{% endblock %}
+
+
+{% block content %}
+<h1> Signup Page </h1>
+<body>
+    <div class="input-form">
+    <h1><u> Create an account </u></h1>
+        <form method="POST">
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="password" id="password1" name="password1" placeholder="Password" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="password" id="password2" name="password2" placeholder="Confirm Password" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="typeRadio">
+                    <input class="radio-input" type="radio" value="Student" name="radioUserType" id="radioStudent">
+                    <label class="radio-label" for="radioStudent"> Student </label>
+                    <input class="radio-input" type="radio" value="Teacher" name="radioUserType" id="radioTeacher">
+                    <label class="radio-label" for="radioStudent"> Teacher </label>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="input-button"> Sign Up </button>
+        </form>
+    </div>
+</body>
+
+{% endblock content%}
