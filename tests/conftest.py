@@ -8,7 +8,6 @@ config = "config.TestingConfig"
 def app():
     app = create_app(config)
 
-    print("CREATING DATABASE")
     with app.app_context():
         db.create_all()
     

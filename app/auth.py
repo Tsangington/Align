@@ -46,12 +46,23 @@ def signUp():
             flash('Passwords must be 8 or more characters', category='error')
         else:
             if userType == "Teacher":
-                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roles = 2)
+                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 2)
             else:
-                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roles = 1)
+                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 1)
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!', category='success')
             return redirect(url_for('auth.login'))
     
     return render_template('auth/signup.html')
+
+@auth.route('/createClass', methods=['GET', 'POST'])
+@login_required
+def createClass():
+    if request.method == 'POST':
+        if current_user.roleid == 1: #Means student, reject create class 
+            pass
+        else:
+            return redirect(url_for('auth.createClass'))
+    else: #They are creating a class
+        pass

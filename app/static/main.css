@@ -7,7 +7,7 @@
 /* Style the links inside the navigation bar */
 body {
     background: #383838;
-    color: #00eeff;
+    color: #00a2ff;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 h1{
@@ -23,7 +23,7 @@ h1{
 
 .topnav a {
     
-    border-bottom: 1px solid #00eeff;
+    border-bottom: 1px solid #00a2ff;
     float: right;
     color: #fffffc;
     text-align: center;
@@ -48,3 +48,11 @@ color: #1c1c1cff;
     border-radius: 15px;
     box-shadow: 0 0 5px rgba(0,0,0, 0.25);
 }
+.alert {
+    padding: 10px;
+    background-color: #00a2ff;
+    color: #fffffc;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
