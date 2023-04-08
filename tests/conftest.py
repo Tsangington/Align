@@ -1,12 +1,19 @@
 import pytest
+from flask_sqlalchemy import SQLAlchemy
+from app import create_app, db
 
-from ss2023_app import create_app
+config = "config.TestingConfig"
 
 @pytest.fixture()
 def app():
-    app = create_app()
+    app = create_app(config)
+
+    print("CREATING DATABASE")
+    with app.app_context():
+        db.create_all()
+    
     yield app
 
 @pytest.fixture()
 def client(app):
-    return app.test_client()
+    yield app.test_client()

@@ -41,3 +41,10 @@ background-color: #282828;
 background-color: #ef233cff;
 color: #1c1c1cff;
 }
+
+.radio-input {
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0, 0.25);
+}
