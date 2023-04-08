@@ -41,7 +41,7 @@ def test_signup_email_fail(client, app):
     with app.app_context():
         assert User.query.count() == 1
 
-def test_course(client, app):
+def test_course_student_join_success(client, app):
     with app.app_context():
         new_student = User(email = "student@test", firstName = "student", lastName = "test", password = generate_password_hash("123456789", method = 'pbkdf2:sha256'), roleid = 1)
         new_teacher = User(email = "teacher@test", firstName = "teacher", lastName = "test", password = generate_password_hash("123456789", method = 'pbkdf2:sha256'), roleid = 2)
