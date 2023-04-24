@@ -20,12 +20,12 @@ def create_app(config):
     with app.app_context():
         db.create_all()
     
-    loginManager = LoginManager()
-    loginManager.login_view = "routes.login"
+    loginManager = LoginManager(app)
+    loginManager.login_view = "auth.login"
     loginManager.init_app(app)
     
     @loginManager.user_loader
     def load_user(id):
-        return User.query.get(int(id))     
+        return User.query.get(int(id))  
 
     return app

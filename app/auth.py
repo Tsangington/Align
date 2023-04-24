@@ -1,8 +1,14 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user, login_manager
-from .models import User
+from .models import User, Course
 from . import db
+from flask_principal import Principal, Permission, RoleNeed, UserNeed, Identity, AnonymousIdentity, identity_changed 
+from datetime import datetime
+
+admin_permission = Permission(RoleNeed('admin'))
+teacher_permission = Permission(RoleNeed('teacher'))
+student_permission = Permission(RoleNeed('student'))
 
 auth = Blueprint('auth', __name__)
 
@@ -23,7 +29,7 @@ def login():
                 flash('Incorrect password, try again.', category = 'error')
         else:
             flash('Email does not exist.', category = 'error')
-
+            
     return render_template('auth/login.html')
 
 
@@ -56,13 +62,27 @@ def signUp():
     
     return render_template('auth/signup.html')
 
-@auth.route('/createClass', methods=['GET', 'POST'])
+@auth.route('/createcourse', methods=['GET', 'POST'])
 @login_required
-def createClass():
+def createCourse():
     if request.method == 'POST':
-        if current_user.roleid == 1: #Means student, reject create class 
-            pass
+        date_start = request.form.get('date_start').replace("/","-").replace(".","-")
+        date_end = request.form.get('date_end').replace("/","-").replace(".","-")
+        date_start = datetime.strptime(date_start, '%d-%m-%Y').date()
+        date_end = datetime.strptime(date_end, '%d-%m-%Y').date()
+        course_information = request.form.get('course_information')
+
+        if datetime.now().date() > date_start:
+            flash('The starting date has already passed!',category="error")
+
+        elif datetime.now().date() > date_end:
+            flash("The end date has already passed!", category="erorr")
+
+        elif date_start > date_end:
+            flash("The end date is before the start date!", category="error")
+
         else:
-            return redirect(url_for('auth.createClass'))
-    else: #They are creating a class
-        pass
+            new_course = Course(teacherid = current_user.id ,dateStart = date_start, dateEnd = date_end, courseInformation = course_information)   
+            db.session.add(new_course)
+            db.session.commit()
+    return redirect(url_for('auth.createCourse'))

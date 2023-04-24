@@ -23,8 +23,9 @@ class User(db.Model, UserMixin):
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    teacherid = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     dateStart = db.Column(db.Date)
     dateEnd = db.Column(db.Date)
+    courseInformation = db.Column(db.String(1000))
     students = db.relationship('User', backref='course', lazy=True) #When adding to class, authenticate, then user.id.course.append(course.id)
 

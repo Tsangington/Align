@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body class="input-form">
+    <h1><u> Login Page </u></h1>
+    <form method="POST">
+        <div class="form-group">
+            <input type="date" id="date_start" name="date_start" placeholder="Date Start" class="input-field" required>
+        </div>
+        <br>
+        <div class="form-group">    
+            <input type="date" id="date_end" name="date_end" placeholder="Date End" class="input-field" required>
+        </div>
+        <br>
+        <div class="form-group">    
+            <input type="text" id="information" name="information" placeholder="Information about the course" class="input-field" required>
+        </div>
+        <br>
+        <button type="submit" class="input-button"> Log In </button>
+    </form>
+<body>
+{% endblock %}
