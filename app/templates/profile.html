@@ -3,5 +3,36 @@
 {% endblock %}
 
 {% block content %}
-<h1> Profile Page </h1>
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <h2 class="account-title">{{ current_user.firstName +" "+ current_user.lastName }}</h2>
+                <p class="account-details"> {{ current_user.email }}</p>
+            </div>
+        </div>
+        <div class="input-form">
+            <h2><u> Update Your Details: </u></h2>
+                <form method="POST">
+                    <div class="form-group">
+                        <input type="email" id="new_email" name="new_email" placeholder="Email" class="input-field">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="new_firstName" name="new_firstName" placeholder="First Name" class="input-field">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="new_lastName" name="new_lastName" placeholder="Last Name" class="input-field">
+                    </div>
+                    <br>
+                    <button type="submit" class="input-button"> Update </button>
+                </form>
+            </div>
+                {% for course in courses_joined %}
+                <div class="course-field"><h3><u>{{ course.courseName }}</u></dh3>
+                    <br><h4>{{ course.courseInformation }}</h4>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
 {% endblock content %}
