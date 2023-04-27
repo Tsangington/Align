@@ -6,7 +6,7 @@ db = SQLAlchemy()
 config = "config.DevelopmentConfig"
     
 def create_app(config):
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__)
     app.config.from_object(config)
     db.init_app(app)
     
