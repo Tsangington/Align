@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    courseName = db.Column(db.String(150))
     teacherid = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     dateStart = db.Column(db.Date)
     dateEnd = db.Column(db.Date)

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Course List </title>
+        <h1><u> Join A Course Today! </u></h1>
+    </head>
+    <body>
+        <form id="course_choice" name="course_choice" method="post">
+            <select id=course_name name="course_name">
+                {% for course in courses %}
+                <option value="{{ course.courseName }}">{{ course.courseName }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit" class="input-button"> Join Course </button>
+        </form>
+    </body>
+{% endblock %}

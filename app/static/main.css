@@ -3,6 +3,11 @@
 /* Light Blue #00eeff */
 
 /* Light Pink #fa2686 */
+/*debug*/
+/**/
+*{
+    outline: 1px solid red; 
+}
 
 /* Style the links inside the navigation bar */
 body {
@@ -13,17 +18,29 @@ body {
 h1{
     margin-top: 0px;
 }
+.logo{
+    font-size: 30px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
 
 .topnav{
+    box-sizing: border-box;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
-    border-bottom: 0px;
+    border-bottom: 3px solid #505050;
+    background-color: #1c1c1cff;
+    display: block;
+    overflow: hidden;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
 }
-
 .topnav a {
-    
-    border-bottom: 1px solid #00a2ff;
+
     float: right;
     color: #fffffc;
     text-align: center;
@@ -34,6 +51,7 @@ h1{
     
 .topnav a:hover {
 background-color: #282828;
+border-bottom: 1px solid #00a2ff;
 }
     
 /* WIP Add a color to the active/current link */
@@ -55,4 +73,22 @@ color: #1c1c1cff;
     justify-content: center;
     margin: 0 auto;
     margin-top: 20px;
+}
+.input-button {
+    color: #e8e8e8;
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #00a2ff;
+    border: 1px solid #00a2ff;
+    transition: all .3s;
+  }
+  
+  .input-button:hover {
+    border: 1px solid #026198;
+  }
+  
+  .input-button:active {
+    box-shadow: 4px 4px 12px #026198,
+               -4px -4px 12px #026198;
   }

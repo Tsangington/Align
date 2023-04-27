@@ -101,12 +101,13 @@ def test_should_pass_course_student_join_existing_course(client, app):
         new_teacher = User(email = "teacher@test", firstName = "teacher", lastName = "test", password = generate_password_hash("123456789", method = 'pbkdf2:sha256'), roleid = 2)
         db.session.add_all([new_student, new_teacher])
         db.session.commit()
-        new_course = Course(teacherid = 1, dateStart = date(2010, 10, 10), dateEnd = date(2010, 11, 10))
+        new_course = Course(teacherid = 1, courseName="test_course", dateStart = date(2010, 10, 10), dateEnd = date(2010, 11, 10))
         db.session.add(new_course)
         db.session.commit()
 
-        new_student.following.append(new_course)
-        db.session.commit()
+        client.post("/login", data={"email":"student@test", "password":"123456789"})
+        response = client.post("/join", data={"course_name":"test_course"})
+        
 
         assert Course.query.count() == 1
         assert len(new_student.following) == 1
@@ -119,7 +120,7 @@ def test_should_pass_course_creation(client,app):
         db.session.add_all([new_student, new_teacher])
         db.session.commit()
         client.post("/login", data={"email":"teacher@test", "password":"123456789"})
-        response = client.post("/createcourse", data={"date_start":"10-10-2030","date_end":"20-10-2030","course_information":"Auto Testing Course Creation"})
+        response = client.post("/createcourse", data={"course_name":"Test","date_start":"2030-10-10","date_end":"2030-10-20","course_information":"Auto Testing Course Creation"})
 
     with app.app_context():
         assert Course.query.count() == 1
@@ -136,11 +137,8 @@ def test_should_fail_course_creation_date_already_started(client,app):
         date_start = date_now - timedelta(days=10)
         date_end = date_now + timedelta(days=20)
 
-        date_start= datetime.strftime(date_start, "%d/%m/%Y")
-        date_end = datetime.strftime(date_end, "%d/%m/%Y")
-
         client.post("/login", data={"email":"teacher@test", "password":"123456789"})
-        response = client.post("/createcourse", data={"date_start":date_start,"date_end":date_end ,"course_information":"Auto Testing Course Creation"})
+        response = client.post("/createcourse", data={"course_name":"Test", "date_start":date_start,"date_end":date_end ,"course_information":"Auto Testing Course Creation"})
 
     with app.app_context():
         assert Course.query.count() == 0
@@ -156,11 +154,8 @@ def test_should_fail_course_creation_date_already_ended(client,app):
         date_start = date_now + timedelta(days=10)
         date_end = date_now - timedelta(days=10)
 
-        date_start= datetime.strftime(date_start, "%d/%m/%Y")
-        date_end = datetime.strftime(date_end, "%d/%m/%Y")
-
         client.post("/login", data={"email":"teacher@test", "password":"123456789"})
-        response = client.post("/createcourse", data={"date_start":date_start,"date_end":date_end ,"course_information":"Auto Testing Course Creation"})
+        response = client.post("/createcourse", data={"course_name":"Test", "date_start":date_start,"date_end":date_end ,"course_information":"Auto Testing Course Creation"})
 
     with app.app_context():
         assert Course.query.count() == 0
@@ -176,11 +171,26 @@ def test_should_fail_course_creation_end_date_before_start_date(client,app):
         date_start = date_now + timedelta(days=20)
         date_end = date_now + timedelta(days=10)
 
-        date_start= datetime.strftime(date_start, "%d/%m/%Y")
-        date_end = datetime.strftime(date_end, "%d/%m/%Y")
-
         client.post("/login", data={"email":"teacher@test", "password":"123456789"})
-        response = client.post("/createcourse", data={"date_start":date_start,"date_end":date_end ,"course_information":"Auto Testing Course Creation"})
+        response = client.post("/createcourse", data={"course_name":"Test", "date_start":date_start,"date_end":date_end ,"course_information":"Auto Testing Course Creation"})
 
     with app.app_context():
         assert Course.query.count() == 0
+
+def test_should_pass_check_profile_courses_joined(client,app):
+    with app.app_context():
+        new_student = User(email = "student@test", firstName = "student", lastName = "test", password = generate_password_hash("123456789", method = 'pbkdf2:sha256'), roleid = 1)
+        new_teacher = User(email = "teacher@test", firstName = "teacher", lastName = "test", password = generate_password_hash("123456789", method = 'pbkdf2:sha256'), roleid = 2)
+        db.session.add_all([new_student, new_teacher])
+        db.session.commit()
+        new_course = Course(teacherid = 1, courseName="test_course", dateStart = date(2010, 10, 10), dateEnd = date(2010, 11, 10), courseInformation="Test Course")
+        db.session.add(new_course)
+        db.session.commit()
+        new_course.followers.append(new_student)
+        db.session.commit()
+
+        client.post("/login", data={"email":"student@test", "password":"123456789"})
+        response = client.post("/profile")
+        
+        assert b"test_course" in response.data
+        assert b"Test Course" in response.data

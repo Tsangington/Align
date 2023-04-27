@@ -32,6 +32,11 @@ def login():
             
     return render_template('auth/login.html')
 
+@auth.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signUp():
@@ -66,10 +71,11 @@ def signUp():
 @login_required
 def createCourse():
     if request.method == 'POST':
-        date_start = request.form.get('date_start').replace("/","-").replace(".","-")
-        date_end = request.form.get('date_end').replace("/","-").replace(".","-")
-        date_start = datetime.strptime(date_start, '%d-%m-%Y').date()
-        date_end = datetime.strptime(date_end, '%d-%m-%Y').date()
+        course_name = request.form.get('course_name')
+        date_start = request.form.get('date_start')
+        date_end = request.form.get('date_end')
+        date_start = datetime.strptime(date_start, '%Y-%m-%d').date()
+        date_end = datetime.strptime(date_end, '%Y-%m-%d').date()
         course_information = request.form.get('course_information')
 
         if datetime.now().date() > date_start:
@@ -82,7 +88,55 @@ def createCourse():
             flash("The end date is before the start date!", category="error")
 
         else:
-            new_course = Course(teacherid = current_user.id ,dateStart = date_start, dateEnd = date_end, courseInformation = course_information)   
+            new_course = Course(teacherid = current_user.id ,courseName=course_name, dateStart = date_start, dateEnd = date_end, courseInformation = course_information)   
             db.session.add(new_course)
             db.session.commit()
-    return redirect(url_for('auth.createCourse'))
+            flash("Course created!", category="success")
+        
+        return redirect(url_for('auth.createCourse'))
+    else:        
+        return render_template("auth/createCourse.html")
+
+@auth.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == "GET":
+        courses_joined = current_user.following()
+        return(render_template("profile.html", courses_joined))
+    else:
+        new_email = request.form.get("new_email")
+        new_firstName = request.form.get("new_firstName")
+        new_lastName = request.form.get("new_lastName")
+        user = User.query.filter_by(email = new_email).first()
+
+        if user:
+            flash("Email already exists in the database", category="success")
+        else:
+            if new_email != "":
+                current_user.email = new_email
+
+        if new_firstName != "":
+            current_user.firstName = new_firstName
+        
+        if new_lastName != "":
+            current_user.lastName = new_lastName
+        
+        db.session.commit()
+
+        flash('Your account has been updated!', category="success")
+        return redirect(url_for("auth.profile"))
+    
+@auth.route("/join", methods =["GET","POST"])
+@login_required
+def join():
+    if request.method == "POST":
+        course_name = request.form.get('course_name')
+        course = Course.query.filter_by(courseName = course_name).first()
+        current_user.following.append(course)
+        db.session.commit()
+
+        flash("Course joined successfully!", category="success")
+        return redirect(url_for("auth.profile"))
+    else:
+        courses = Course.query.all()
+        return render_template("join.html", courses=courses)
