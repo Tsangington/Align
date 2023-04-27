@@ -16,16 +16,16 @@ def create_app(config):
     from .auth import auth
     app.register_blueprint(auth, url_prefix = '/')
 
-    from .models import User
+    from .models import User, Course
     with app.app_context():
         db.create_all()
     
-    loginManager = LoginManager()
-    loginManager.login_view = "routes.login"
+    loginManager = LoginManager(app)
+    loginManager.login_view = "auth.login"
     loginManager.init_app(app)
     
     @loginManager.user_loader
     def load_user(id):
-        return User.query.get(int(id))     
+        return User.query.get(int(id))  
 
     return app

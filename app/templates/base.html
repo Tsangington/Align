@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert {{ category }}">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet"> !-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
@@ -23,6 +21,7 @@
 </head>
 <body>
     <div class="topnav">
+        <div class="logo">Align</div>
         <a href="{{ url_for('views.landing') }}">About</a>
         <a href="{{ url_for('views.profile') }}">Profile</a>
         <a href="{{ url_for('auth.login') }}">Login</a>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ user.firstName }}</h1>
+    <hr>
+    {% for course in courses %}
+    <p>
+    {{course = Course.query.filter_by(course.id=id)}}
+    {{ course.courseName }} <b>{{ course.courseInformation }}</b>
+    </p>
+    {% endfor %}
+{% endblock %}
