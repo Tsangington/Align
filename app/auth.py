@@ -56,7 +56,7 @@ def signUp():
         if userEMail:
             flash('This email already exists, please login instead.', category = 'error')
         elif userUsername:
-            flash('This username already exists, please user another username.', category = 'error')
+            flash('This username already exists, please use another username.', category = 'error')
         elif password != passwordConfirm:
             flash('Passwords must match', category='error')
         elif len(password) < 8:
