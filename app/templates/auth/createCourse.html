@@ -1,26 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<body class="input-form">
-    <h1><u> Login Page </u></h1>
-    <form method="POST">
-        <div class="form-group">
-            <input type="text" id="course_name" name="course_name" placeholder="Course name" class="input-field" required>
-        </div>
-        <br>
-        <div class="form-group">
-            <input type="date" id="date_start" name="date_start" placeholder="Date Start" class="input-field" required>
-        </div>
-        <br>
-        <div class="form-group">    
-            <input type="date" id="date_end" name="date_end" placeholder="Date End" class="input-field" required>
-        </div>
-        <br>
-        <div class="form-group">    
-            <input type="text" id="information" name="information" placeholder="Information about the course" class="input-field" required>
-        </div>
-        <br>
-        <button type="submit" class="input-button"> Log In </button>
-    </form>
+<body>
+    <h1><u> Create A Course </u></h1>
+    <div class="input-form">
+        <form class="form-class" method="POST">
+            <div class="form-group">
+                <input type="text" id="course_name" name="course_name" placeholder="Course name" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="date" id="date_start" name="date_start" placeholder="Date Start" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">    
+                <input type="date" id="date_end" name="date_end" placeholder="Date End" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-group">    
+                <input type="text" id="course_information" name="course_information" placeholder="Course information" class="input-field" required>
+            </div>
+            <br>
+            <div class="form-button">
+                <button type="submit" class="input-button"> Create </button>
+            </div>
+        </form>
+    </div>
 <body>
 {% endblock %}

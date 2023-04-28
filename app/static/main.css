@@ -1,78 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 /* Grey #383838 */ 
 /* Light Grey #e3e3e3 */ 
 /* Light Blue #00eeff */
 
 /* Light Pink #fa2686 */
-/*debug*/
-/**/
+/*debug = outline: 1px solid red; */
 *{
-    outline: 1px solid red; 
+    outline: 0px solid red;
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #282828;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background: #282828;
+    color: #00a2ff;
 }
 
-/* Style the links inside the navigation bar */
-body {
-    background: #383838;
-    color: #00a2ff;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-h1{
-    margin-top: 0px;
+/* Navbar styling */
+.navbar{
+    background-color: #202020;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    border-bottom: 2px inset #111;
 }
 .logo{
-    font-size: 30px;
-    padding-left: 10px;
-    padding-top: 10px;
+    font-size: 40px;
+    color: #00a2ff;
 }
-
-.topnav{
-    box-sizing: border-box;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 3px solid #505050;
-    background-color: #1c1c1cff;
-    display: block;
-    overflow: hidden;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    z-index: 2;
+.logo:hover{
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
-.topnav a {
-
-    float: right;
-    color: #fffffc;
-    text-align: center;
-    padding: 14px 16px;
+li, a{
+    background-color: #202020;
+    font-weight: 500;
+    font-size: 24px;
+    color: #e8e8e8;
     text-decoration: none;
-    font-size: 20px;
 }
-    
-.topnav a:hover {
-background-color: #282828;
-border-bottom: 1px solid #00a2ff;
+.navbar-links{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #202020;
+    list-style: none;
 }
-    
-/* WIP Add a color to the active/current link */
-.topnav a.active {
-background-color: #ef233cff;
-color: #1c1c1cff;
+.navbar-links li {
+    display: inline-block;
+    padding: 0px 15px;
+}
+.navbar-links li a{
+    transition: all 0.3s ease 0s;
+}
+.navbar-links li a:hover{
+    color: #00a2ff;
+    border-bottom: 1px solid #00a2ff;
 }
 
-.radio-input {
-    display: inline-flex;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 0 5px rgba(0,0,0, 0.25);
+.hamburger{
+    display: none;
+    cursor: pointer;
 }
+.bar{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #00a2ff;
+}
+@media(max-width:500px){
+    .hamburger{
+        display: block;
+    }
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    .navbar-links{
+        position:fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: #202020;
+        color: transparent;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+    .navbar-links.active{
+        left: 0;
+    }
+    .navbar-item{
+        margin: 16px 0;
+        color: transparent;
+    }
+}
+
+/* content box styling */
+.content-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+.content {
+    display: grid;
+    padding-top: 40px;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+/* alert css */
 .alert {
+    display: flex;
+    column-gap: 10px;
     padding: 10px;
     background-color: #00a2ff;
     color: #fffffc;
     justify-content: center;
     margin: 0 auto;
     margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+.closebtn{
+    background-color: transparent;
+}
+.closebtn:hover{
+    cursor: pointer;
+}
+
+/* form input css */
+.input-form{
+    display: grid;
+    justify-content: center;
+    width: 100%;
+}
+.input-field{
+    border:0;
+    background:transparent;
+    width: 400px;
+    font-size: 20px;
+    color:#fff;
+}
+.input-field:hover{
+    border-bottom: 2px solid #ffffff;
+}
+.form-class {
+    width:100%
+ }
+.radio-input {
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 15px;
 }
 .input-button {
     color: #e8e8e8;
@@ -82,13 +176,35 @@ color: #1c1c1cff;
     background: #00a2ff;
     border: 1px solid #00a2ff;
     transition: all .3s;
-  }
-  
-  .input-button:hover {
+}
+.input-button:hover {
     border: 1px solid #026198;
-  }
-  
-  .input-button:active {
+}
+.input-button:active {
     box-shadow: 4px 4px 12px #026198,
-               -4px -4px 12px #026198;
-  }
+        -4px -4px 12px #026198;
+}
+.form-group {
+    display: grid;
+    justify-content: center;
+    row-gap: 10px;
+    border: 0;
+    background: transparent;
+    width: 400px;
+    padding: 0px 0 0px 0;
+    font-size: 16px;
+    color: #fff;
+    column-gap: 10px;
+    border-bottom: 1px solid #00a2ff;
+}
+.form-button{
+    display: flex;
+    justify-content: center;
+}
+.type-radio {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    justify-content: space-evenly;
+}
+

@@ -35,7 +35,8 @@ def login():
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    flash("Logged out successfully!", category="success")
+    return redirect(url_for('views.landing'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -43,21 +44,26 @@ def signUp():
     if request.method == 'POST':
         email = request.form.get('email')
         firstName = request.form.get('firstName')
+        username = request.form.get('username')
         lastName = request.form.get('lastName')
         password = request.form.get('password1')
         passwordConfirm = request.form.get('password2')
         userType = request.form.get('radioUserType')
 
-        user = User.query.filter_by(email = email).first()
-        if user:
+        userEMail = User.query.filter_by(email = email).first()
+        userUsername = User.query.filter_by(username = username).first()
+
+        if userEMail:
             flash('This email already exists, please login instead.', category = 'error')
+        elif userUsername:
+            flash('This username already exists, please use another username.', category = 'error')
         elif password != passwordConfirm:
             flash('Passwords must match', category='error')
         elif len(password) < 8:
             flash('Passwords must be 8 or more characters', category='error')
         else:
             if userType == "Teacher":
-                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 2)
+                new_user = User(email = email, username=username, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 2)
             else:
                 new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 1)
             db.session.add(new_user)
@@ -105,15 +111,24 @@ def profile():
         return(render_template("profile.html", courses_joined))
     else:
         new_email = request.form.get("new_email")
+        new_username = request.form.get("new_username")
         new_firstName = request.form.get("new_firstName")
         new_lastName = request.form.get("new_lastName")
-        user = User.query.filter_by(email = new_email).first()
+        
+        userEmail = User.query.filter_by(email = new_email).first()
+        userUsername = User.query.filter_by(username = new_email).first()
 
-        if user:
-            flash("Email already exists in the database", category="success")
+        if userEmail:
+            flash("Email already exists in the database.", category="error")
         else:
             if new_email != "":
                 current_user.email = new_email
+        
+        if userUsername:
+            flash("Username already exists in the database.", category="error")
+        else:
+            if new_username != "":
+                current_user.username = new_username
 
         if new_firstName != "":
             current_user.firstName = new_firstName
