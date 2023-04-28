@@ -5,7 +5,7 @@
 {% block content %}
 <body>
     <h2 class="account-title">Welcome back {{ current_user.firstName +" "+ current_user.lastName }}!</h2>
-    <p class="account-details"> Email {{ current_user.email }}</p>
+    <p class="account-details"> Email: {{ current_user.email }}</p>
     <p class="account-details"> Username: {{ current_user.username }}</p>
     <h2><u> Update Your Details: </u></h2>
         <div class="input-form">
