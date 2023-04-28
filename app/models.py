@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(150))
     creationDate = db.Column(db.DateTime(timezone = True), default = func.now())
     roleid = db.Column(db.Integer)
-    following = db.relationship('Course', secondary = students , backref = "followers")
+    following = db.relationship('Course', secondary = students , backref = "followers", cascade="all, delete")
     #Roles: 
     #Student = 1
     #Teacher = 2
