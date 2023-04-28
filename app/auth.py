@@ -35,7 +35,8 @@ def login():
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    flash("Logged out successfully!", category="success")
+    return redirect(url_for('views.landing'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -43,21 +44,26 @@ def signUp():
     if request.method == 'POST':
         email = request.form.get('email')
         firstName = request.form.get('firstName')
+        username = request.form.get('username')
         lastName = request.form.get('lastName')
         password = request.form.get('password1')
         passwordConfirm = request.form.get('password2')
         userType = request.form.get('radioUserType')
 
-        user = User.query.filter_by(email = email).first()
-        if user:
+        userEMail = User.query.filter_by(email = email).first()
+        userUsername = User.query.filter_by(username = username).first()
+
+        if userEMail:
             flash('This email already exists, please login instead.', category = 'error')
+        elif userUsername:
+            flash('This username already exists, please user another username.', category = 'error')
         elif password != passwordConfirm:
             flash('Passwords must match', category='error')
         elif len(password) < 8:
             flash('Passwords must be 8 or more characters', category='error')
         else:
             if userType == "Teacher":
-                new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 2)
+                new_user = User(email = email, username=username, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 2)
             else:
                 new_user = User(email = email, firstName = firstName, lastName = lastName, password = generate_password_hash(password, method = 'pbkdf2:sha256'), roleid = 1)
             db.session.add(new_user)

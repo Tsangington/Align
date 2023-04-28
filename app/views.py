@@ -9,6 +9,7 @@ def landing():
     return render_template('landing.html')
 
 @views.route('/profile')
+@login_required
 def profile():
     return render_template('profile.html')
 
