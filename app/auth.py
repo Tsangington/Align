@@ -155,3 +155,13 @@ def join():
     else:
         courses = Course.query.all()
         return render_template("join.html", courses=courses)
+
+@auth.route("/delete")
+@login_required
+def delete():
+    user_to_delete = User.query.filter_by(id = current_user.id).first_or_404()
+
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    flash("User Deleted Successfully.", category="success")
+    return redirect(url_for("views.landing"))
