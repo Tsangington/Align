@@ -111,15 +111,24 @@ def profile():
         return(render_template("profile.html", courses_joined))
     else:
         new_email = request.form.get("new_email")
+        new_username = request.form.get("new_username")
         new_firstName = request.form.get("new_firstName")
         new_lastName = request.form.get("new_lastName")
-        user = User.query.filter_by(email = new_email).first()
+        
+        userEmail = User.query.filter_by(email = new_email).first()
+        userUsername = User.query.filter_by(username = new_email).first()
 
-        if user:
-            flash("Email already exists in the database", category="success")
+        if userEmail:
+            flash("Email already exists in the database.", category="error")
         else:
             if new_email != "":
                 current_user.email = new_email
+        
+        if userUsername:
+            flash("Username already exists in the database.", category="error")
+        else:
+            if new_username != "":
+                current_user.username = new_username
 
         if new_firstName != "":
             current_user.firstName = new_firstName

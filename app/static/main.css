@@ -15,7 +15,7 @@
     font-family: 'Roboto', sans-serif;
 }
 body {
-    background: #383838;
+    background: #282828;
     color: #00a2ff;
 }
 
@@ -88,7 +88,6 @@ li, a{
     .hamburger.active .bar:nth-child(3){
         transform: translateY(-8px) rotate(-45deg);
     }
-
     .navbar-links{
         position:fixed;
         left: -100%;
@@ -126,12 +125,17 @@ li, a{
 
 /* alert css */
 .alert {
+    display: flex;
+    column-gap: 10px;
     padding: 10px;
     background-color: #00a2ff;
     color: #fffffc;
     justify-content: center;
     margin: 0 auto;
     margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
 }
 .closebtn{
     background-color: transparent;
