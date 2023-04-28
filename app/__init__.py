@@ -7,6 +7,9 @@ config = "config.DevelopmentConfig"
     
 def create_app():
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = "wqeqweewefddvcxaxsdf3456"
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://align_db_user:1pHxVvDHlcECTnDcnoogAnpGsaSSbCTr@dpg-ch58ebqk728glsktoep0-a/align_db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     
     from .views import views
