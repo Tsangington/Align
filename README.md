@@ -51,13 +51,23 @@
 
 A solo starter project to understand website development and full-stack engineers. A teaching platform, with the ability to sign up, log in, log out, create a course, join a course, view other people's profiles.
 
-
+* Website Architecture <br/>
 ![Website Architecture](https://user-images.githubusercontent.com/102903601/235075392-8a8ec66a-a85d-4122-802e-ceb9d822400f.png)<p align="right">(<a href="#readme-top">back to top</a>)</p>
+* ERD <br/>
+![ERD](https://user-images.githubusercontent.com/102903601/235108069-eb545b66-19db-4cf4-bd6c-e1b28d612fda.png)
+* Landing Page (WIP) <br/>
 ![Landing Page (WIP)](https://user-images.githubusercontent.com/102903601/235075706-2338e833-2364-47ec-8ac7-a8269b09aec6.png)
+* Sign Up Page <br/>
 ![Sign Up Page](https://user-images.githubusercontent.com/102903601/235075816-2baf4d5f-b42d-4379-80a2-aaa834c555f9.png)
+* Login Page <br/>
 ![Login Page](https://user-images.githubusercontent.com/102903601/235075892-3a6b11af-e3e0-4fe5-8cce-c08fcc237b91.png)
+* Styling <br/>
 ![Styling](https://user-images.githubusercontent.com/102903601/235075980-bd0016c1-a42b-4dff-961e-08629bf591dc.png)
+* Dynamic <br/>
 ![dyanmic to fit the screen](https://user-images.githubusercontent.com/102903601/235076121-191b35c4-cc75-47da-a446-36319c0ae066.png)
+* Alerts <br/>
+![Alerts](https://user-images.githubusercontent.com/102903601/235108653-3518618b-454b-4cfa-8906-8066a793692b.png)
+
 
 ### Built With
 
