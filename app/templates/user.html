@@ -5,8 +5,8 @@
     <hr>
     {% for course in courses %}
     <p>
-    {{course = Course.query.filter_by(course.id=id)}}
-    {{ course.courseName }} <b>{{ course.courseInformation }}</b>
+    <h2>{{ course.courseName }}</h2>
+        {{ course.courseInformation }}
     </p>
     {% endfor %}
 {% endblock %}

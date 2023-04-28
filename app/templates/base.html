@@ -1,31 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <div class="alert {{ category }}">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    {{ msg }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
-    <title> Align </title>
-    {% block head %}{% endblock %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+        <title> Align </title>
 </head>
 <body>
-    <div class="topnav">
-        <div class="logo">Align</div>
-        <a href="{{ url_for('views.landing') }}">About</a>
-        <a href="{{ url_for('views.profile') }}">Profile</a>
-        <a href="{{ url_for('auth.login') }}">Login</a>
+    <header>
+        <div class="navbar">
+            <h2><a href="{{ url_for('views.landing') }}" class="logo"> Align </a></h2>
+            <nav>
+                <ul class="navbar-links">
+                    <li class="nav-item"><a href="{{ url_for('views.landing') }}">About</a></li>
+                    <li class="nav-item"><a href="{{ url_for('views.profile') }}">Profile</a></li>
+                    <li class="nav-item"><a href="{{ url_for('auth.login') }}">Login</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert {{ category }}">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <div class="content-container">
+        <div class="padding-content"></div>
+        <div class="content">
+            {% block content %} {% endblock content %}
+            <div class="padding-content"></div>
+        </div>
     </div>
-    {% block content %} {% endblock content %}
+    <script src="/static/scripts.js"></script>
 </body>
 </html>
