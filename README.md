@@ -49,6 +49,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+https://align.onrender.com/
+
 A solo starter project to understand website development and full-stack engineers. A teaching platform, with the ability to sign up, log in, log out, create a course, join a course, view other people's profiles.
 
 * Website Architecture <br/>
