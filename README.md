@@ -16,8 +16,6 @@
   </p>
 </div>
 
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -52,6 +50,8 @@
 https://align.onrender.com/
 
 A solo starter project to understand website development and full-stack engineers. A teaching platform, with the ability to sign up, log in, log out, create a course, join a course, view other people's profiles.
+* User Requirements <br/>
+![User Requirements](https://github.com/Tsangington/Align/assets/102903601/cbae220f-f991-4c74-8352-0dc19d11c4c8)
 
 * Website Architecture <br/>
 ![Website Architecture](https://user-images.githubusercontent.com/102903601/235075392-8a8ec66a-a85d-4122-802e-ceb9d822400f.png)<p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -144,7 +144,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    py main.py
    ```
-7. Secret URLs
+7. Secret URLs (Not yet implemented front-end)
      ```sh
    align/user/<username> #searches for a user
    align/logout #logs out the current user
